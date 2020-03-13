@@ -1,0 +1,20 @@
+.foot-container {
+  display: flex;
+  // flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: #a89b9d;
+  font-size: $text-size;
+  height: 20vh;
+  padding: 2em;
+
+  button {
+    i {
+      color: $header-color;
+    }
+  }
+
+  button:hover i {
+    color: $primary-color;
+  }
+}

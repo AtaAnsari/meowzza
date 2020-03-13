@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Meowzza!</title>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <!-- material design requirement -->
+  <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
+  <!-- material design icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- flickity -->
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <!-- material design requirement -->
+  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/86ffe6f375.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header class="page-header">
+    <span class="visually-hidden focus-span" tabindex="1"></span>
+
+    <div class="header-text">
+
+      <h1><i class="fas fa-paw"></i>Meowzza!</h1>
+      <p>Adopt an exotic cat today</p>
+    </div>
+    <section class="new-listing"></section>
+  </header>
+  <main class="wrapper">
+    <section class="messages-section">
+
+    </section>
+
+    <section class="new-cat-form-section">
+
+    </section>
+    <section class="gallery">
+      <!-- featured cats carousel -->
+      <div class="carousel">
+      </div>
+    </section>
+
+    <div>
+      <h2><i class="fas fa-paw"></i> Filter your search</h2>
+      <form action="/users/filteredCats" method="get" class="filters-form">
+        <div class="form-container">
+          <div class="form-border">
+            <fieldset>
+              <label>Adoption fee:</label>
+                <input class="min fieldset-dimensions no-padding" type="number" name="minimum_fee" id="minimum_fee" placeholder="min">
+                <input class="fieldset-dimensions no-padding" type="number" name="maximum_fee" id="maximum_fee" placeholder="max">
+              </fieldset>
+            <fieldset>
+              <label for="region">Region:</label>
+              <select class="fieldset-dimensions no-padding" name="region" id="region">
+                <option value="" name="region"></option>
+                <option value="North America" name="region">North America</option>
+                <option value="South America" name="region">South America</option>
+                <option value="Europe" name="region">Europe</option>
+                <option value="Asia" name="region">Asia</option>
+                <option value="Africa" name="region">Africa</option>
+                <option value="Antarctica" name="region">Antarctica</option>
+                <option value="Oceania" name="region">Oceania</option>
+                <option value="Australia" name="region">Australia</option>
+              </select>
+            </fieldset>
+            <fieldset>
+              <label for="size">Size:</label>
+              <select class="fieldset-dimensions no-padding" name="size" id="size">
+                <option value="" name="size"></option>
+                <option value="s" name="size">S</option>
+                <option value="m" name="size">M</option>
+                <option value="l" name="size">L</option>
+              </select>
+            </fieldset>
+            <button type="submit" class="mdc-button mdc-button--raised">
+              <div class="mdc-button__ripple"></div>
+              Filter
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <section class="cats-container">
+
+    </section>
+  </main>
+
+  <footer class="foot-container">
+    <div>
+      <h3>Copyright &copy; 2020 <i class="fas fa-paw"></i> Meowzza. By Ata, Luba & Steven. All rights reserved.</h3>
+    </div>
+    <div class="mdc-card__actions">
+      <button class="mdc-icon-button mdc-button--touch
+        mdc-card__action mdc-card__action--icon
+        aria-pressed="false"
+        aria-label="Share to Facebook"
+        title="Share to Facebook">
+        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on"></i>
+        <i class="fab fa-facebook material-icons mdc-icon-button__icon"></i>
+        <div class="mdc-button__touch"></div>
+      </button>
+      <button class="mdc-icon-button mdc-button--touch
+        mdc-card__action mdc-card__action--icon
+        aria-pressed="false"
+        aria-label="Share to Instagram"
+        title="Share to Instagram">
+        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on"></i>
+        <i class="fab fa-instagram material-icons mdc-icon-button__icon"></i>
+        <div class="mdc-button__touch"></div>
+      </button>
+      <button class="mdc-icon-button mdc-button--touch
+        mdc-card__action mdc-card__action--icon
+        aria-pressed="false"
+        aria-label="Share to Twitter"
+        title="Share to Twitter">
+        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on"></i>
+        <i class="fab fa-twitter material-icons mdc-icon-button__icon"></i>
+        <div class="mdc-button__touch"></div>
+      </button>
+      <button class="mdc-icon-button mdc-button--touch
+        mdc-card__action mdc-card__action--icon
+        aria-pressed="false"
+        aria-label="Share to Reddit"
+        title="Share to Reddit">
+        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on"></i>
+        <i class="fab fa-reddit-alien material-icons mdc-icon-button__icon"></i>
+        <div class="mdc-button__touch"></div>
+      </button>
+    </div>
+  </footer>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/libraries/meowzza.js"></script>
+  <!-- <script src="scripts/views_manager.js"></script> -->
+  <script src="scripts/components/featured.js"></script>
+  <script src="scripts/components/cat_listing.js"></script>
+  <script src="scripts/components/header.js"></script>
+  <script src="scripts/components/new_cat_form.js"></script>
+  <script src="scripts/components/messages.js"></script>
+
+  <script src="scripts/app.js"></script>
+  <!-- flickity script -->
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+  <!-- <script src="scripts/components/cats_listing.js"></script> -->
+</body>
+
+</html>

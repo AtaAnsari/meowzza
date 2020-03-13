@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS favourites CASCADE;
+CREATE TABLE favourites (
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+  cat_id INTEGER REFERENCES cats(id) ON DELETE CASCADE NOT NULL,
+  UNIQUE (user_id, cat_id)
+);
