@@ -31,3 +31,7 @@ Meowzza is single page marketplace application for exotic cat adoption. We have 
 - Install all dependencies (using the `npm install` command).
 - Run the development web server using the `npm run local` command.
 - Reset the database before running the app, by using the following command in your terminal: npm run db:reset
+
+## Authors: 
+
+Liubov Kleimenova, Steven Choi, Ata Ansari 
