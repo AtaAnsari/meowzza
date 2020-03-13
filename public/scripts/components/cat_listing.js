@@ -1,3 +1,5 @@
+// THIS FUNCTION CONDITIONALLY RENDERS OUR CATS CARD.
+
 window.Meowza.createListing = (cat, user) => {
 
   let avalClass = "";

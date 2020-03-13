@@ -1,7 +1,6 @@
 function addNewCatForm(user) {
   $(".new-cat-form-section").find(".new-cat-form").remove();
   const $catFormSection = $(".new-cat-form-section");
-  const $newListing = $(".new-listing");
   let $newCatForm = `<form action="/admin/newcat" method="POST" id="new-cat-form" class="new-cat-form">
       <h3><i class="fas fa-paw"></i> Create your cat listing</h3>
 
@@ -81,36 +80,3 @@ function addNewCatForm(user) {
 
 window.Meowza.addNewCatForm = addNewCatForm;
 
-//addNewCatForm(user1);
-
-// $newcatForm.addressfield({
-//   json: "javascript/libraries/addressfield/addressfield.min.json",
-//   fields: {
-//     country: "#new-cat-form__country",
-//     locality: "#new-cat-form__locality-fields",
-//     localityname: "#new-cat-form__city",
-//     administrativearea: "#new-cat-form__state",
-//     postalcode: "#new-cat-form__zip"
-//   }
-// });
-
-// $newcatForm.on("submit", function(event) {
-//   event.preventDefault();
-
-//   views_manager.show("none");
-
-//   const data = $(this).serialize();
-//   submitcat(data)
-//     .then(() => {
-//       views_manager.show("listings");
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       views_manager.show("listings");
-//     });
-// });
-
-// $("body").on("click", "#cat-form__cancel", function() {
-//   views_manager.show("listings");
-//   return false;
-// });

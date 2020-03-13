@@ -1,96 +1,7 @@
-window.Meowza = {};
-
-$(document).ready(() => {
-  Meowza.update(Meowza.user);
-  loadCats();
-  $(document).on("submit", ".login-form", e => {
-    e.preventDefault();
-    getUser();
-  });
-  //$("body").scrollTop(0);
-});
-
-
-const getUser = () => {
-  $.ajax({
-    url: `/login`,
-    type: "POST",
-    data: $(".login-form").serialize(),
-    success: response => {
-      window.Meowza.user = response;
-      console.log(`user at login ${JSON.stringify(Meowza.user)}`);
-      Meowza.update(Meowza.user);
-      Meowza.addNewCatForm(Meowza.user);
-      Meowza.loadCats(Meowza.user);
-      $("header").on("click", ".favourites-button", function() {
-        window.Meowza.catListings.empty();
-        loadFavouriteCats(Meowza.user);
-      });
-      $(".filters-form").submit(e => {
-        e.preventDefault();
-        window.Meowza.catListings.empty();
-        loadFilteredCats(Meowza.user);
-      });
-
-      $("header").on("click", ".home-button", function() {
-        window.Meowza.catListings.empty();
-        loadCats(Meowza.user);
-      });
-
-      $("header").on("click", ".owner-button", function() {
-        window.Meowza.catListings.empty();
-        loadMyCats(Meowza.user);
-      });
-
-      $("header").on("click", ".create-button", function() {
-        $(".new-cat-form").slideToggle();
-      });
-
-      $("header").on("click", ".message-link", function() {
-        showMsgList()
-        $(".messages-section").slideToggle();
-      });
-
-      $(document).on("click", ".add-to-favourites", addToFavourites);
-
-      $(document).on('submit', ".sending-message", function(e) {
-        console.log('invoking sendMsg')
-        e.preventDefault()
-        sendMsg(this);
-      })
-
-      $(document).on('submit', '.message-reply', function(e) {
-        e.preventDefault()
-        sendReply(this)
-      })
-
-      $(document).on("submit", "#new-cat-form", e => {
-        e.preventDefault();
-        console.log("form submitted");
-        createNewCat(Meowza.user);
-      });
-
-      $(document).on("click", ".logout-button", logOut);
-      $(document).on("click", "#delete-btn", deleteCat);
-
-      $(document).on("click", "#sold-btn", e => {
-        console.log(e.target);
-        const card = $(e.target).closest(".cats-listing");
-        console.log(card);
-        markCatSold(card);
-        e.preventDefault;
-      });
-      $(document).on("click", ".send-sms", sendSms);
-    }
-  });
-  return Meowza.user;
-};
-
 const logOut = () => {
   $.ajax({
     method: "POST",
     url: "/logout",
-    // data:
     success: () => {
       $.ajax({
         url: `/users/`,
@@ -170,29 +81,16 @@ const loadFilteredCats = (user) => {
   $.ajax({
     url: `/users/filteredCats`,
     type: "GET",
-    //dataType: "JSON",
     data: $(".filters-form").serialize(),
     success: response => {
-      //console.log(response);
       renderCats(response, user);
     }
   });
 };
 
-$(".filters-form").submit(e => {
-  //console.log(e);
-  e.preventDefault();
-  //console.log("filtered");
-  window.Meowza.catListings.empty();
-  loadFilteredCats();
-});
-
 // --------------ADD TO FAVOURITES --------------
 const addToFavourites = function() {
-  // console.log("addToFAvs invoked");
-  // console.log(this);
   const catId = $(this).data("catid");
-  // console.log(catId);
   $.ajax({
     url: `/users/addToFavourites`,
     type: "POST",
@@ -210,13 +108,11 @@ const createNewCat = function(user) {
     type: "POST",
     data: $(".new-cat-form").serialize(),
     success: () => {
-      //console.log("data submitted to db succ");
       $.ajax({
         url: `/users/`,
         type: "GET",
         dataType: "JSON",
         success: data => {
-          //console.log("data recieved from server");
           $(".cats-container").empty();
           renderCats(data, user);
         }
@@ -239,7 +135,6 @@ const deleteCat = function() {
         dataType: "JSON",
         success: data => {
           $(".cats-container").empty();
-          //console.log(`user at deleteCat ${JSON.stringify(window.Meowza.user)}`);
           renderCats(data, window.Meowza.user);
         }
       });
@@ -248,7 +143,6 @@ const deleteCat = function() {
 };
 
 //--------------SHOW MESSAGES--------------
-
 const showMsgList = function () {
   $.ajax({
     url: `/myMessages`,
@@ -263,10 +157,7 @@ const showMsgList = function () {
 
 //-------------- MARK CAT AS UNAVAILABLE ---------
 const markCatSold = function (listing) {
-  //console.log(this);
-  //console.log(listing["0"].dataset.catid)
   const catId = listing["0"].dataset.catid;
-  //console.log(catId);
   listing.toggleClass("cat-adopted");
   $.ajax({
     url: `/admin/updateCat`,
@@ -278,7 +169,6 @@ const markCatSold = function (listing) {
        type: "GET",
        dataType: "JSON",
        success: data => {
-         //console.log("data recieved from server");
          $(".cats-container").empty();
          renderCats(data, window.Meowza.user);
        }
@@ -288,11 +178,7 @@ const markCatSold = function (listing) {
 }
 
 //--------------SEND MESSAGES--------------
-
-
 const sendMsg = function (form) {
-  console.log('getting info from user');
-
   $.ajax({
     url: `/sendMessage`,
     type: "POST",
@@ -308,10 +194,7 @@ const sendMsg = function (form) {
 }
 
 //--------------SEND REPLY--------------
-
 const sendReply = function (form) {
-  console.log('Reply initiated');
-
   $.ajax({
     url: `/sendMessage`,
     type: "POST",
@@ -333,11 +216,9 @@ const sendReply = function (form) {
 
 //--------------SEND SMS--------------
 const sendSms = function () {
-  console.log(this)
   $.ajax({
     url: `/send_sms/send`,
     type: "POST",
-    // dataType: "JSON",
     success: () => {
       console.log("Sent SMS!");
     }

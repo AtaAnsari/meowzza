@@ -2,7 +2,6 @@
  * All routes for Users are defined here
  * Since this file is loaded in server.js into api/users,
  *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
 const express = require('express');
@@ -39,13 +38,8 @@ module.exports = (databaseHelperFunctions) => {
 
    // Add cat to favourite cats
   router.post('/addToFavourites', (req, res) => {
-    console.log('addToFavs invoked(server)')
-    //console.log(req.query);
-    console.log(req.body);
     let catId = req.body.catId;
     let userId= req.session.userId;
-
-    console.log('userId, users.js' + req.session.userId);
     databaseHelperFunctions
       .addToFavourites(userId, catId)
       .then(data => res.json(data))

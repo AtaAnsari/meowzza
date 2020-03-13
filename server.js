@@ -12,36 +12,8 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 const cookieSession = require('cookie-session');
-const msgRoutes = require("./routes/send_sms");
-// email functionality
-// const nodemailer = require('nodemailer');
-// async function sendEmail() {
-//   // Generate test SMTP service account from ethereal.email
-//   // create reusable transporter object for host configuration
-//   let transporter = nodemailer.createTransport({
-//     host: "smtp.gmail.com",
-//     port: 587,
-//     secure: false, // true for 465, false for other ports
-//     auth: {
-//       user: 'stevencschoi87@gmail.com', // generated ethereal user
-//       pass: '' // generated ethereal password
-//     }
-//   });
-
-//   // send mail with defined transport object
-//   let info = await transporter.sendMail({
-//     from: '"Meowzza 👻" <stevencschoi87@gmail.com>', // sender address
-//     to: "stevenspamlol@gmail.com", // list of receivers
-//     subject: "Hello ✔", // Subject line
-//     text: "Hello world?", // plain text body
-//     html: "<p>This is a test!</p>" // html body
-//   });
-
-//   console.log("Message sent: %s", info.messageId);
-//   // Preview only available when sending through an Ethereal account
-//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-// }
-// main().catch(console.error);
+// *********Please uncomment the code below to use the twilio functionality*********
+// const msgRoutes = require("./routes/send_sms");
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -58,9 +30,6 @@ app.use(cookieSession({
   keys: ['key1']
 }));
 
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
@@ -74,25 +43,21 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const adminRoutes = require("./routes/admin");
 // Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(databaseHelperFunctions));
 app.use("/admin", adminRoutes(databaseHelperFunctions));
-app.use("/send_sms", msgRoutes());
-// Note: mount other resources here, using the same pattern above
+// *********Please uncomment the code below to use the twilio functionality*********
+// app.use("/send_sms", msgRoutes());
 
 
 // Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-
+// ******Shared routes******
 // Allows users to login and Logout
 
 app.post('/logout', (req, res) => {

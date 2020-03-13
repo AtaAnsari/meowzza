@@ -14,18 +14,15 @@ module.exports = (db) => {
   }
   const getFavourites = function (userId) {
     return db
-      .query(
-        `
+    .query(    `
     SELECT * FROM cats
     JOIN favourites ON cats.id = cat_id
     WHERE favourites.user_id = $1
-
     ORDER BY is_available DESC
-
     `,
-        [userId]
-      )
-      .then(res => res.rows);
+    [userId]
+    )
+    .then(res => res.rows);
   }
 
   const filterBySearch = function(options) {
@@ -54,11 +51,6 @@ module.exports = (db) => {
     queryParams.push(options.size);
     whereClauses.push(`size IN ($${queryParams.length}) `);
   }
-  // **** Uncomment if we want to filter by species ****
-  // if (options.species) {
-  //   queryParams.push(`${options.species}`);
-  //   whereClauses.push(`species = $${queryParams.length}`);
-  // }
   if (whereClauses.length) {
     queryString += `WHERE ${whereClauses.join(' AND ')}`;
   }
@@ -66,16 +58,11 @@ module.exports = (db) => {
     ORDER BY fee
     LIMIT 10;
     `;
-    // 6
-    console.log(queryString);
-    console.log(queryParams);
     return db.query(queryString, queryParams)
     .then(res => res.rows);
   }
 
   const createMsgPost = function (message, userId, catId, ownerId) {
-    console.log(message);
-    console.log(`${userId} is id`);
     return db.query(`
     INSERT INTO messages (receiver_id, cat_id, sender_id, message)
     VALUES ($1, $2, $3, $4)
@@ -89,9 +76,9 @@ module.exports = (db) => {
     return db
       .query(
         `
-    INSERT INTO cats (owner_id, name, description, main_photo_url, fee, birthdate, region, size, species, is_available)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-    RETURNING *;
+      INSERT INTO cats (owner_id, name, description, main_photo_url, fee, birthdate, region, size, species, is_available)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING *;
     `,
         [
           userId,
@@ -122,22 +109,21 @@ module.exports = (db) => {
     return db
       .query(
         `
-     SELECT users.name as sender_name, allMsgsNames.* from
-     (SELECT users.name as receiver_name, allMsgs.* from
-     (SELECT messages.* FROM messages
-     WHERE receiver_id = $1 OR sender_id = $1
-     ORDER BY cat_id, id) AS allMsgs
-     left outer JOIN users ON allMsgs.receiver_id=users.id) AS allMsgsNames
-     left outer JOIN users ON allMsgsNames.sender_id=users.id
-     order by allMsgsNames.id;
-     `,
+      SELECT users.name as sender_name, allMsgsNames.* from
+      (SELECT users.name as receiver_name, allMsgs.* from
+      (SELECT messages.* FROM messages
+      WHERE receiver_id = $1 OR sender_id = $1
+      ORDER BY cat_id, id) AS allMsgs
+      left outer JOIN users ON allMsgs.receiver_id=users.id) AS allMsgsNames
+      left outer JOIN users ON allMsgsNames.sender_id=users.id
+      order by allMsgsNames.id;
+      `,
         [userId]
       )
       .then(res => res.rows);
   };
 
   const addToFavourites = function (userId, catId) {
-    console.log(`userId ${userId}, catId  ${catId}`);
     return db
       .query(
         `
@@ -148,7 +134,6 @@ module.exports = (db) => {
         [userId, catId]
       )
       .then(res => {
-        console.log(res.rows);
         res.rows})
       .catch(err => {
         // if combination exists in favourites, delete from favourites db
@@ -208,38 +193,12 @@ const markCatUnavailable = function(catId) {
 
 };
 
-
-// *********** HELPER FUNCTIONS FOR SENDING EMAILS ************
-
-// async..await is not allowed in global scope, must use a wrapper
-async function sendEmail(to, subject, text) {
-  // create reusable transporter object for host configuration
-  let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com", // gmail server
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: 'stevenspamlol@gmail.com', // please enter email address
-      pass: '' // please enter password
-    }
-  });
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: '"Meowzza 🐾" <stevenspamlol@gmail.com>', // sender address
-    to: `${to}`, // list of receivers
-    subject: `${subject}`, // Subject line
-    text: `${text}` // plain text body
-    // html: "<p>This is a test!</p>" // html body
-  });
-  console.log("Message sent: %s", info.messageId);
-}
   return {
     getAllCats,
     getAllUsers,
     filterBySearch,
     getMessages,
     getMyCats,
-    sendEmail,
     getFavourites,
     createMsgPost,
     createNewCat,
