@@ -76,9 +76,19 @@ window.Meowza.createListing = (cat, user) => {
           <input name="catId" value="${cat.id}" hidden="">
           <input name="ownerId" value="${cat.owner_id}" hidden="">
             <textarea name="message" placeholder="Interested? Leave a message directly for the owner!"></textarea>
-            <label for="users-mail">Or get contacted by email:</label>
+            <label for="users-mail">Or get contacted by SMS:</label>
             <div class="email-button-container">
-              <input type="email" class="users-mail" id="users-mail" placeholder="Your email">
+            <input type="number" class="users-mail phone" id="users-mail" placeholder="Your cell number">
+            <button
+              class="send-sms mdc-icon-button mdc-button--touch
+              mdc-card__action mdc-card__action--icon
+              aria-pressed="false"
+              aria-label="Send SMS"
+              title="Send SMS">
+              <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on"></i>
+              <i class="fas fa-mobile-alt material-icons mdc-icon-button__icon"></i>
+              <div class="mdc-button__touch"></div>
+            </button>
               <button type="submit" class=" mdc-button message-form mdc-button--raised">
                 <div class="mdc-button__ripple"></div>
                 Message
@@ -182,9 +192,19 @@ window.Meowza.createListing = (cat, user) => {
         <input name="catId" value="${cat.id}" hidden="">
         <input name="ownerId" value="${cat.owner_id}" hidden="">
           <textarea name="message" placeholder="Interested? Leave a message directly for the owner!"></textarea>
-          <label for="users-mail">Or get contacted by email:</label>
+          <label for="users-mail">Or get contacted by SMS:</label>
           <div class="email-button-container">
-            <input type="email" class="users-mail" id="users-mail" placeholder="Your email">
+          <input type="number" class="users-mail phone" id="users-mail" placeholder="Your cell number">
+            <button
+              class="send-sms mdc-icon-button mdc-button--touch
+              mdc-card__action mdc-card__action--icon
+              aria-pressed="false"
+              aria-label="Send SMS"
+              title="Send SMS">
+              <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on"></i>
+              <i class="fas fa-mobile-alt material-icons mdc-icon-button__icon"></i>
+              <div class="mdc-button__touch"></div>
+            </button>
             <button type="submit" class=" mdc-button message-form mdc-button--raised">
               <div class="mdc-button__ripple"></div>
               Message
@@ -259,9 +279,7 @@ window.Meowza.createListing = (cat, user) => {
         <p>${cat.description}</p>
         <form>
           <textarea class="message" placeholder="Interested? Leave a message directly for the owner!"></textarea>
-          <label for="users-mail">Or get contacted by email:</label>
           <div class="email-button-container">
-            <input type="email" class="users-mail" id="users-mail" placeholder="Your email">
             <button type="submit" class="mdc-button mdc-button--raised">
               <div class="mdc-button__ripple"></div>
               Message

@@ -79,8 +79,8 @@ const getUser = () => {
         console.log(card);
         markCatSold(card);
         e.preventDefault;
-
       });
+      $(document).on("click", ".send-sms", sendSms);
     }
   });
   return Meowza.user;
@@ -329,5 +329,18 @@ const sendReply = function (form) {
       })
     }
   })
+}
+
+//--------------SEND SMS--------------
+const sendSms = function () {
+  console.log(this)
+  $.ajax({
+    url: `/send_sms/send`,
+    type: "POST",
+    // dataType: "JSON",
+    success: () => {
+      console.log("Sent SMS!");
+    }
+  });
 }
 

@@ -12,6 +12,7 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 const cookieSession = require('cookie-session');
+const msgRoutes = require("./routes/send_sms");
 // email functionality
 // const nodemailer = require('nodemailer');
 // async function sendEmail() {
@@ -80,6 +81,7 @@ const adminRoutes = require("./routes/admin");
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(databaseHelperFunctions));
 app.use("/admin", adminRoutes(databaseHelperFunctions));
+app.use("/send_sms", msgRoutes());
 // Note: mount other resources here, using the same pattern above
 
 
