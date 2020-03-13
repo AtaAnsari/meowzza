@@ -1,5 +1,5 @@
-const accountSid = 'ACdd24552af0290b476c314e6e6c26d688';
-const authToken = 'beaa3ceb49517a044f19b1360f9725f5';
+// const accountSid =
+// const authToken =
 const client = require('twilio')(accountSid, authToken);
 const express = require('express');
 const router  = express.Router();

@@ -307,3 +307,34 @@ article {
   right: 145px;
 }
 
+.message-card{
+ margin: 15px auto;
+}
+.message-body{
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.message-header{
+  font-size: 0.65em;
+}
+
+.message-card{
+  width: 75%;
+}
+
+.message-body{
+  margin: 15px 0 10px 0;
+}
+
+.reply-button {
+  width: 20%;
+}
+
+.message-reply textarea {
+  width: 100%;
+}
+
+.sender {
+  margin-bottom: 10px;
+}

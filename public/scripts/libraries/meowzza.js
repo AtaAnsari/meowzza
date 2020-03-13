@@ -333,6 +333,7 @@ const sendReply = function (form) {
 
 //--------------SEND SMS--------------
 const sendSms = function () {
+  console.log(this)
   $.ajax({
     url: `/send_sms/send`,
     type: "POST",

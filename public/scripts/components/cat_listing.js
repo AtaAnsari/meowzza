@@ -76,7 +76,7 @@ window.Meowza.createListing = (cat, user) => {
           <input name="catId" value="${cat.id}" hidden="">
           <input name="ownerId" value="${cat.owner_id}" hidden="">
             <textarea name="message" placeholder="Interested? Leave a message directly for the owner!"></textarea>
-            <label for="users-mail">Or get contacted by email:</label>
+            <label for="users-mail">Or get contacted by SMS:</label>
             <div class="email-button-container">
             <input type="number" class="users-mail phone" id="users-mail" placeholder="Your cell number">
             <button
@@ -192,7 +192,7 @@ window.Meowza.createListing = (cat, user) => {
         <input name="catId" value="${cat.id}" hidden="">
         <input name="ownerId" value="${cat.owner_id}" hidden="">
           <textarea name="message" placeholder="Interested? Leave a message directly for the owner!"></textarea>
-          <label for="users-mail">Or get contacted by email:</label>
+          <label for="users-mail">Or get contacted by SMS:</label>
           <div class="email-button-container">
           <input type="number" class="users-mail phone" id="users-mail" placeholder="Your cell number">
             <button
@@ -279,9 +279,7 @@ window.Meowza.createListing = (cat, user) => {
         <p>${cat.description}</p>
         <form>
           <textarea class="message" placeholder="Interested? Leave a message directly for the owner!"></textarea>
-          <label for="users-mail">Or get contacted by email:</label>
           <div class="email-button-container">
-            <input type="email" class="users-mail" id="users-mail" placeholder="Your email">
             <button type="submit" class="mdc-button mdc-button--raised">
               <div class="mdc-button__ripple"></div>
               Message
