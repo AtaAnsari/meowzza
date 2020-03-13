@@ -4,18 +4,30 @@ Meowzza is single page marketplace application for exotic cat adoption. We have 
 
 ## Final Product
 
-!["Mobile version"](https://github.com/AtaAnsari/tweeter/blob/master/docs/mobile.png)
-!["Tablet version"](https://github.com/AtaAnsari/tweeter/blob/master/docs/tablet.png)
-!["Desktop Version"](https://github.com/AtaAnsari/tweeter/blob/master/docs/desktop.png)
+!["featuredCats"](https://github.com/AtaAnsari/meowzza/blob/master/docs/featuredCats.png)
+!["msgingFeature"](https://github.com/AtaAnsari/meowzza/blob/master/docs/msgingFeature.png)
+!["catCards"](https://github.com/AtaAnsari/meowzza/blob/master/docs/catCards.png)
+!["addNewCatForm"](https://github.com/AtaAnsari/meowzza/blob/master/docs/addNewCatForm.png)
 
 ## Dependencies
 
-- body-parser
-- chance
+- body-parser  
+- chalk  
+- cookie-session  
+- dotenv  
+- ejs 
 - express 
-- md5 
+- flickity 
+- material-components-web   
+- morgan 
+- node-sass-middleware 
+- nodemailer 
+- pg 
+- pg-native 
+- twilio 
 
 ## Getting Started
 
 - Install all dependencies (using the `npm install` command).
 - Run the development web server using the `npm run local` command.
+- Reset the database before running the app, by using the following command in your terminal: npm run db:reset
